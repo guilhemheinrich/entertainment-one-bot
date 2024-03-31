@@ -19,12 +19,13 @@ import {Config} from './src/config'
         await page.click('img[src="/static/images/next.png"]', {delay: 100});
 
         await page.waitForNavigation({ waitUntil: 'networkidle2' });
-        await page.waitForNavigation({ waitUntil: 'networkidle2' });
+        await page.waitForFunction('document.querySelector("body").innerText.includes("Mine")')
+        
         await page.screenshot({ path: 'screenshot/screenshot.png' });
-        // Ferme le navigateur.
     } catch (error) {
         console.error(error)
         await page.screenshot({ path: 'screenshot/error.png' });
     }
+    // Ferme le navigateur.
     await browser.close();
 })();
